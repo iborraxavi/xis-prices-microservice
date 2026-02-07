@@ -16,6 +16,15 @@
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+
+        <xis-prices-api-server.version>1.0.0-SNAPSHOT</xis-prices-api-server.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.xis</groupId>
+            <artifactId>xis-prices-api-server</artifactId>
+            <version>${xis-prices-api-server.version}</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -17,4 +17,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.xis.prices</groupId>
+            <artifactId>xis-prices-application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xis.prices</groupId>
+            <artifactId>xis-prices-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xis.prices</groupId>
+            <artifactId>xis-prices-infrastructure</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
