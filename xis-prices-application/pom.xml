@@ -18,4 +18,11 @@
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.xis.prices</groupId>
+            <artifactId>xis-prices-domain</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

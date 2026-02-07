@@ -22,6 +22,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.xis.prices</groupId>
+            <artifactId>xis-prices-application</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.xis</groupId>
             <artifactId>xis-prices-api-server</artifactId>
             <version>${xis-prices-api-server.version}</version>
