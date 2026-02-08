@@ -2,6 +2,7 @@ package com.xis.prices.application.usecase.getprice;
 
 import com.xis.prices.application.usecase.getprice.request.GetPriceCommand;
 import com.xis.prices.application.usecase.getprice.response.GetPriceResponse;
+import com.xis.prices.domain.exception.NotFoundException;
 import com.xis.prices.domain.repository.PriceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,19 @@ public class GetPriceUseCase {
 
   public Mono<GetPriceResponse> dispatch(final GetPriceCommand getPriceCommand) {
     return priceRepository
-        .getPrice(
+        .findApplicablePrices(
             getPriceCommand.productId(),
             getPriceCommand.brandId(),
             getPriceCommand.applicationDate())
-        .map(getPriceMapper::priceToGetPriceResponse);
+        .next()
+        .map(getPriceMapper::priceToGetPriceResponse)
+        .switchIfEmpty(
+            Mono.error(
+                new NotFoundException(
+                    "No applicable price found for productId: %s, brandId: %s and applicationDate: %s"
+                        .formatted(
+                            getPriceCommand.productId(),
+                            getPriceCommand.brandId(),
+                            getPriceCommand.applicationDate()))));
   }
 }

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,8 +37,8 @@ class GetPriceUseCaseTest {
     when(getPriceCommand.productId()).thenReturn(productId);
     when(getPriceCommand.brandId()).thenReturn(brandId);
     when(getPriceCommand.applicationDate()).thenReturn(applicationDate);
-    when(priceRepository.getPrice(productId, brandId, applicationDate))
-        .thenReturn(Mono.just(price));
+    when(priceRepository.findApplicablePrices(productId, brandId, applicationDate))
+        .thenReturn(Flux.just(price));
     when(getPriceMapper.priceToGetPriceResponse(price)).thenReturn(getPriceResponse);
 
     // Act
@@ -48,7 +48,7 @@ class GetPriceUseCaseTest {
         .verify();
 
     // Verify
-    verify(priceRepository, only()).getPrice(productId, brandId, applicationDate);
+    verify(priceRepository, only()).findApplicablePrices(productId, brandId, applicationDate);
     verify(getPriceMapper, only()).priceToGetPriceResponse(price);
   }
 }
