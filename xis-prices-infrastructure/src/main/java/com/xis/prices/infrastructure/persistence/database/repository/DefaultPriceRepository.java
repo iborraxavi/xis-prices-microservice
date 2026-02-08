@@ -16,6 +16,7 @@ public class DefaultPriceRepository implements PriceRepository {
   private final JpaPriceRepository jpaPriceRepository;
   private final PriceEntityMapper priceEntityMapper;
 
+  /** {@inheritDoc} */
   @Override
   public Flux<Price> findApplicablePrices(
       final Long productId, final Integer brandId, final OffsetDateTime applicationDate) {

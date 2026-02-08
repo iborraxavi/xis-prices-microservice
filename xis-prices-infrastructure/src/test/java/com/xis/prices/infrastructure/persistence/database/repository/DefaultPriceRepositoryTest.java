@@ -7,6 +7,7 @@ import com.xis.prices.infrastructure.persistence.database.entity.PriceEntity;
 import com.xis.prices.infrastructure.persistence.database.jpa.JpaPriceRepository;
 import com.xis.prices.infrastructure.persistence.database.mapper.PriceEntityMapper;
 import java.time.OffsetDateTime;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,9 +28,9 @@ class DefaultPriceRepositoryTest {
   @DisplayName("Find applicable prices when success should return expected flux")
   void findApplicablePrices_whenSuccess_shouldReturnExpectedFlux() {
     // Given
-    final Long productId = 1L;
-    final Integer brandId = 1;
-    final OffsetDateTime applicationDate = OffsetDateTime.now();
+    final Long productId = generateRandomProductId();
+    final Integer brandId = generateRandomBrandId();
+    final OffsetDateTime applicationDate = generateApplicationDate();
     final PriceEntity firstPriceEntity = mock(PriceEntity.class);
     final PriceEntity secondPriceEntity = mock(PriceEntity.class);
     final Price firstPrice = mock(Price.class);
@@ -58,12 +59,12 @@ class DefaultPriceRepositoryTest {
   @DisplayName("Find applicable prices when prices not found should return expected flux")
   void findApplicablePrices_whenPricesNotFound_shouldReturnExpectedFlux() {
     // Given
-    final Long productId = 1L;
-    final Integer brandId = 1;
-    final OffsetDateTime applicationDate = OffsetDateTime.now();
+    final Long productId = generateRandomProductId();
+    final Integer brandId = generateRandomBrandId();
+    final OffsetDateTime applicationDate = generateApplicationDate();
 
     when(jpaPriceRepository.findApplicablePrices(productId, brandId, applicationDate))
-        .thenReturn(Flux.just());
+        .thenReturn(Flux.empty());
 
     // Act
     StepVerifier.create(
@@ -80,9 +81,9 @@ class DefaultPriceRepositoryTest {
   @DisplayName("Find applicable prices when error should throw expected exception")
   void findApplicablePrices_whenError_shouldThrowExpectedException() {
     // Given
-    final Long productId = 1L;
-    final Integer brandId = 1;
-    final OffsetDateTime applicationDate = OffsetDateTime.now();
+    final Long productId = generateRandomProductId();
+    final Integer brandId = generateRandomBrandId();
+    final OffsetDateTime applicationDate = generateApplicationDate();
 
     when(jpaPriceRepository.findApplicablePrices(productId, brandId, applicationDate))
         .thenReturn(Flux.error(new IllegalStateException("Database error")));
@@ -96,5 +97,21 @@ class DefaultPriceRepositoryTest {
     // Verify
     verify(jpaPriceRepository, only()).findApplicablePrices(productId, brandId, applicationDate);
     verifyNoInteractions(priceEntityMapper);
+  }
+
+  private Long generateRandomProductId() {
+    return Instancio.gen().longs().range(Long.MIN_VALUE, Long.MAX_VALUE).get();
+  }
+
+  private Integer generateRandomBrandId() {
+    return Instancio.gen().ints().range(Integer.MIN_VALUE, Integer.MAX_VALUE).get();
+  }
+
+  private OffsetDateTime generateApplicationDate() {
+    return Instancio.gen()
+        .temporal()
+        .offsetDateTime()
+        .range(OffsetDateTime.now().minusYears(10), OffsetDateTime.now())
+        .get();
   }
 }
