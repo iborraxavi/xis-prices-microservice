@@ -1,8 +1,8 @@
 package com.xis.prices.infrastructure.rest.mapper;
 
+import com.xis.prices.api.model.Price;
 import com.xis.prices.application.usecase.getprice.request.GetPriceCommand;
 import com.xis.prices.application.usecase.getprice.response.GetPriceResponse;
-import com.xis.prices.model.Price;
 import java.time.OffsetDateTime;
 import org.mapstruct.Mapper;
 

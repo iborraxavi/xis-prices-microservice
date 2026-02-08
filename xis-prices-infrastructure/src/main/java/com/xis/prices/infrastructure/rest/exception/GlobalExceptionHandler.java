@@ -1,7 +1,7 @@
 package com.xis.prices.infrastructure.rest.exception;
 
+import com.xis.prices.api.model.Error;
 import com.xis.prices.domain.exception.NotFoundException;
-import com.xis.prices.model.Error;
 import java.time.OffsetDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

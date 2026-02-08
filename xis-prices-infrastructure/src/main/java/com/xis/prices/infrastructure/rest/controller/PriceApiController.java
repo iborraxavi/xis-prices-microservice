@@ -1,9 +1,9 @@
 package com.xis.prices.infrastructure.rest.controller;
 
 import com.xis.prices.api.PricesApi;
+import com.xis.prices.api.model.Price;
 import com.xis.prices.application.usecase.getprice.GetPriceUseCase;
 import com.xis.prices.infrastructure.rest.mapper.PriceApiMapper;
-import com.xis.prices.model.Price;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.time.OffsetDateTime;

@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
 
-        <xis-prices-api-server.version>1.0.0-SNAPSHOT</xis-prices-api-server.version>
+        <xis-prices-api-server.version>1.0.0</xis-prices-api-server.version>
     </properties>
 
     <dependencies>

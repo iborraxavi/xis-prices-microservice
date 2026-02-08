@@ -2,11 +2,11 @@ package com.xis.prices.infrastructure.rest.controller;
 
 import static org.mockito.Mockito.*;
 
+import com.xis.prices.api.model.Price;
 import com.xis.prices.application.usecase.getprice.GetPriceUseCase;
 import com.xis.prices.application.usecase.getprice.request.GetPriceCommand;
 import com.xis.prices.application.usecase.getprice.response.GetPriceResponse;
 import com.xis.prices.infrastructure.rest.mapper.PriceApiMapper;
-import com.xis.prices.model.Price;
 import java.time.OffsetDateTime;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.DisplayName;
